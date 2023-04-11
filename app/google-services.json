@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "637276245215",
+    "project_id": "firecontact-cfdf5",
+    "storage_bucket": "firecontact-cfdf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637276245215:android:1200a630522b7b5dc76d6a",
+        "android_client_info": {
+          "package_name": "com.example.random"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637276245215-h3lhb2misus0sirr69mje292tldedn7j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.random",
+            "certificate_hash": "0c3d7e3437d3c3e87f044005179c556d3e1bc13c"
+          }
+        },
+        {
+          "client_id": "637276245215-tet668r9b78k3qpsk0jpfgtbbdvb8eqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRPjGeVGJmeAA7gW97MrYZwXzaVuqvAAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637276245215-tet668r9b78k3qpsk0jpfgtbbdvb8eqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
