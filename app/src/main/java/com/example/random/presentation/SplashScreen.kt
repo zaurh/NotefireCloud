@@ -1,10 +1,8 @@
 package com.example.random.presentation
 
-import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -13,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.random.R
 import kotlinx.coroutines.delay
-import java.time.Duration
 
 @Composable
 fun SplashScreen(
@@ -27,7 +24,7 @@ fun SplashScreen(
     }
     Box(modifier = Modifier.fillMaxHeight()) {
         Image(
-            painter = painterResource(id = R.drawable.newlogo),
+            painter = painterResource(id = R.drawable.splash),
             contentScale = ContentScale.Crop,
             contentDescription = "",
             modifier = Modifier.fillMaxHeight()

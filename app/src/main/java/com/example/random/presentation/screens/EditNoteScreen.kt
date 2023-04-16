@@ -1,4 +1,4 @@
-package com.example.random.presentation
+package com.example.random.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -8,7 +8,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.random.data.NoteData
+import com.example.random.presentation.SharedViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -37,7 +37,7 @@ fun EditNoteScreen(
     var descriptionTf by remember { mutableStateOf("") }
     var dropdownExpanded by remember { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = Unit){
+    LaunchedEffect(key1 = Unit) {
         titleTf = note.noteTitle.toString()
         descriptionTf = note.noteDescription.toString()
     }
@@ -141,23 +141,24 @@ fun EditNoteScreen(
                 FloatingActionButton(
                     onClick = {
                         focus.clearFocus()
-                        if (titleTf.isEmpty() && descriptionTf.isEmpty()){
+                        if (titleTf.isEmpty() && descriptionTf.isEmpty()) {
                             sharedViewModel.deleteNote(note.noteId!!)
                         }
                         sharedViewModel.addNote(titleTf, descriptionTf)
                         sharedViewModel.deleteNote(note.noteId!!)
 
-                        navController.navigate("main"){
+                        navController.navigate("main") {
                             popUpTo(0)
                         }
                     },
                     modifier = Modifier
                         .align(alignment = Alignment.BottomEnd)
                         .padding(25.dp)
-                        .size(70.dp), backgroundColor = colorResource(id = com.example.random.R.color.blue)
+                        .size(70.dp),
+                    backgroundColor = colorResource(id = com.example.random.R.color.blue)
                 ) {
                     Icon(
-                        painter = painterResource(id = com.example.random.R.drawable.save),
+                        painter = painterResource(id = com.example.random.R.drawable.save_ic),
                         contentDescription = "",
                         tint = Color.White,
                         modifier = Modifier.size(30.dp)

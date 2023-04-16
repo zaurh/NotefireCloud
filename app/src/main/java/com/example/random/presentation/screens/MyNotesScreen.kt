@@ -1,7 +1,6 @@
-package com.example.random.presentation
+package com.example.random.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,7 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.random.R
-import com.example.random.common.MySearchBar
+import com.example.random.presentation.SharedViewModel
+import com.example.random.presentation.components.MySearchBar
 import com.example.random.presentation.components.NoteListItem
 import com.google.gson.Gson
 
@@ -110,14 +110,10 @@ fun MainScreen(
                             items(noteData.value) { note ->
                                 NoteListItem(
                                     noteData = note,
-                                    navController = navController,
                                     onClick = {
                                         val noteJson = Gson().toJson(note)
                                         navController.navigate("edit_note/$noteJson")
                                         focus.clearFocus()
-                                    },
-                                    onLongClick = {
-                                        sharedViewModel.deleteNote(note.noteId!!)
                                     })
                             }
                         })

@@ -28,8 +28,8 @@ class SharedViewModel @Inject constructor(
     val isSignedIn = mutableStateOf(false)
     val noteData = mutableStateOf<List<NoteData>>(listOf())
 
-    var initialNoteList = listOf<NoteData>()
-    var isSearchStarting = true
+    private var initialNoteList = listOf<NoteData>()
+    private var isSearchStarting = true
 
     init {
         isSignedIn.value = auth.currentUser != null
@@ -44,7 +44,7 @@ class SharedViewModel @Inject constructor(
         if (!checkValidEmail(email)) {
             Toast.makeText(context, "Email is not valid.", Toast.LENGTH_SHORT).show()
             isLoading.value = false
-        }else if(password.length < 8){
+        } else if (password.length < 8) {
             Toast.makeText(context, "Password should be at least 8 characters.", Toast.LENGTH_SHORT)
                 .show()
             isLoading.value = false
@@ -84,6 +84,18 @@ class SharedViewModel @Inject constructor(
         isSignedIn.value = false
     }
 
+    fun forgotPassword(email: String, context: Context) {
+        auth.sendPasswordResetEmail(email).addOnSuccessListener {
+            Toast.makeText(context, "Sent. Please check your email.", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(
+                context,
+                "Problem occurred. Please enter valid email.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     //*****************   Firebase AUTH Catching errors   *********************
 
     private fun checkEmailExistence(email: String, context: Context) {
@@ -108,7 +120,6 @@ class SharedViewModel @Inject constructor(
         val emailPattern = Patterns.EMAIL_ADDRESS
         return emailPattern.matcher(email).matches()
     }
-
 
 
     //***********************    Firebase Firestore   **********************
@@ -147,7 +158,7 @@ class SharedViewModel @Inject constructor(
         if (currentUserId != null) {
             fireStore.collection("note")
                 .whereEqualTo("userId", currentUserId)
-                .addSnapshotListener { value, error ->
+                .addSnapshotListener { value, _ ->
                     value?.let { it ->
                         noteData.value = it.toObjects<NoteData>().sortedByDescending { it.time }
                     }
@@ -188,17 +199,10 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun clearSearch(){
+    fun clearSearch() {
         noteData.value = initialNoteList
         isSearchStarting = true
     }
 
-//    fun updateNote(noteId: String, title: String, description: String) {
-//        val updateNote = hashMapOf<String, Any>(
-//            "noteTitle" to title,
-//            "noteDescription" to description
-//        )
-//        fireStore.collection("note").document(noteId).update(updateNote)
-//    }
 }
 

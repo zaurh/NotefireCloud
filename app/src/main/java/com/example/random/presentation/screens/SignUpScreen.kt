@@ -1,4 +1,4 @@
-package com.example.random.presentation
+package com.example.random.presentation.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -31,7 +31,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 //import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.random.common.MyCheckSignedIn
-import com.example.random.common.MyProgressBar
+import com.example.random.presentation.SharedViewModel
+import com.example.random.presentation.components.MyProgressBar
 
 @Composable
 fun SignUpScreen(
@@ -72,7 +73,7 @@ fun SignUpScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = com.example.random.R.drawable.firelogonew),
+                painter = painterResource(id = com.example.random.R.drawable.notefire_logo),
                 contentDescription = "",
                 modifier = Modifier.size(150.dp)
             )
@@ -85,13 +86,19 @@ fun SignUpScreen(
             )
             Spacer(modifier = Modifier.size(40.dp))
             TextField(
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focus.clearFocus()
+                    }
+                ),
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
                     .fillMaxWidth()
                     .border(
                         1.dp,
                         color = if (emailTfError) Color.Red else Color.DarkGray,
-                        CircleShape),
+                        CircleShape
+                    ),
                 value = emailTf,
                 onValueChange = { emailTf = it },
                 textStyle = TextStyle(
@@ -135,12 +142,19 @@ fun SignUpScreen(
             }
             Spacer(modifier = Modifier.size(8.dp))
             TextField(
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focus.clearFocus()
+                    }
+                ),
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
                     .fillMaxWidth()
-                    .border(1.dp,
+                    .border(
+                        1.dp,
                         color = if (passwordTfError) Color.Red else Color.DarkGray,
-                        CircleShape),
+                        CircleShape
+                    ),
                 value = passwordTf,
                 onValueChange = { passwordTf = it },
                 textStyle = TextStyle(
@@ -203,9 +217,11 @@ fun SignUpScreen(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
                     .fillMaxWidth()
-                    .border(1.dp,
+                    .border(
+                        1.dp,
                         color = if (confirmPasswordTfError) Color.Red else Color.DarkGray,
-                        CircleShape),
+                        CircleShape
+                    ),
                 value = confirmPasswordTf,
                 onValueChange = { confirmPasswordTf = it },
                 textStyle = TextStyle(
@@ -217,7 +233,7 @@ fun SignUpScreen(
                         emailTfError = true
                     } else if (passwordTf.isEmpty()) {
                         passwordTfError = true
-                    } else if(confirmPasswordTf.isEmpty()){
+                    } else if (confirmPasswordTf.isEmpty()) {
                         confirmPasswordTfError = true
                     } else {
                         sharedViewModel.signUp(emailTf, passwordTf, confirmPasswordTf, context)
@@ -275,7 +291,7 @@ fun SignUpScreen(
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.size(30.dp))
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -288,7 +304,7 @@ fun SignUpScreen(
                         emailTfError = true
                     } else if (passwordTf.isEmpty()) {
                         passwordTfError = true
-                    } else if(confirmPasswordTf.isEmpty()){
+                    } else if (confirmPasswordTf.isEmpty()) {
                         confirmPasswordTfError = true
                     } else {
                         sharedViewModel.signUp(emailTf, passwordTf, confirmPasswordTf, context)
@@ -303,7 +319,7 @@ fun SignUpScreen(
             }
 
             Spacer(modifier = Modifier.size(32.dp))
-            Row() {
+            Row {
                 Text(text = "Already have an account? ", color = Color.DarkGray)
                 Text(
                     text = "Sign In!",

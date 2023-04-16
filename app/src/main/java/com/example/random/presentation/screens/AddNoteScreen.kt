@@ -1,4 +1,4 @@
-package com.example.random.presentation
+package com.example.random.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.random.R
+import com.example.random.presentation.SharedViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -92,11 +93,11 @@ fun AddNoteScreen(
                 }
                 FloatingActionButton(
                     onClick = {
-                        navController.navigate("main"){
+                        navController.navigate("main") {
                             popUpTo(0)
                         }
                         focus.clearFocus()
-                        if (titleTf.isNotEmpty() || descriptionTf.isNotEmpty()){
+                        if (titleTf.isNotEmpty() || descriptionTf.isNotEmpty()) {
                             sharedViewModel.addNote(titleTf, descriptionTf)
                         }
 
@@ -107,7 +108,7 @@ fun AddNoteScreen(
                         .size(70.dp), backgroundColor = colorResource(id = R.color.blue)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.save),
+                        painter = painterResource(id = R.drawable.save_ic),
                         contentDescription = "",
                         tint = Color.White,
                         modifier = Modifier.size(30.dp)

@@ -8,9 +8,4 @@ data class NoteData(
     val noteDescription: String? = null,
     val userId: String? = null,
     val time: Timestamp = Timestamp.now()
-){
-    fun toMap() = mapOf(
-        "noteTitle" to noteTitle,
-        "noteDescription" to noteDescription
-    )
-}
+)

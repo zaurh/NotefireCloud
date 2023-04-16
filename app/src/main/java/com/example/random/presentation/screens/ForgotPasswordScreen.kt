@@ -1,6 +1,5 @@
-package com.example.random.presentation
+package com.example.random.presentation.screens
 
-import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -23,34 +22,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.random.R
-import com.example.random.common.MyCheckSignedIn
-import com.example.random.common.MyProgressBar
+import com.example.random.presentation.SharedViewModel
+import com.example.random.presentation.components.MyProgressBar
 
 @Composable
-fun SignInScreen(
+fun ForgotPasswordScreen(
     navController: NavController,
     sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
-
-    MyCheckSignedIn(navController = navController, viewModel = sharedViewModel)
 
     val isLoading = sharedViewModel.isLoading.value
     val focus = LocalFocusManager.current
     var emailTf by remember { mutableStateOf("") }
     var emailTfError by remember { mutableStateOf(false) }
-    var passwordTf by remember { mutableStateOf("") }
-    var passwordTfError by remember { mutableStateOf(false) }
 
-    var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
 
@@ -72,18 +63,24 @@ fun SignInScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = com.example.random.R.drawable.firelogonew),
+                painter = painterResource(id = R.drawable.notefire_logo),
                 contentDescription = "",
                 modifier = Modifier.size(150.dp)
             )
             Spacer(modifier = Modifier.size(40.dp))
             Text(
-                text = "Welcome!",
+                text = "Forgot Password",
                 fontSize = 30.sp,
                 fontFamily = FontFamily.Serif,
                 color = Color.DarkGray
             )
             Spacer(modifier = Modifier.size(40.dp))
+            Text(
+                text = "Enter the email associated with your account and we'll send an email with instructions to reset your password",
+                color = Color.Gray,
+                modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+            )
+            Spacer(modifier = Modifier.size(20.dp))
             TextField(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email
@@ -117,6 +114,14 @@ fun SignInScreen(
                         modifier = Modifier.alpha(0.5f)
                     )
                 },
+                keyboardActions = KeyboardActions(onDone = {
+                    if (emailTf.isEmpty()) {
+                        emailTfError = true
+                    } else {
+                        sharedViewModel.forgotPassword(emailTf, context)
+                        focus.clearFocus()
+                    }
+                }),
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.White,
                     errorIndicatorColor = Color.Transparent,
@@ -139,92 +144,8 @@ fun SignInScreen(
                 }
 
             }
-            Spacer(modifier = Modifier.size(8.dp))
-            TextField(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .fillMaxWidth()
-                    .border(
-                        1.dp,
-                        color = if (passwordTfError) Color.Red else Color.DarkGray,
-                        CircleShape
-                    ),
-                value = passwordTf,
-                onValueChange = { passwordTf = it },
-                textStyle = TextStyle(
-                    color = Color.Black,
-                    fontSize = 16.sp
-                ),
-                keyboardActions = KeyboardActions(onDone = {
-                    if (emailTf.isEmpty()) {
-                        emailTfError = true
-                    } else if (passwordTf.isEmpty()) {
-                        passwordTfError = true
-                    }else {
-                        sharedViewModel.signIn(emailTf, passwordTf, context)
-                    }
-                    focus.clearFocus()
-                }),
-                singleLine = true,
-                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = "",
-                        tint = Color.DarkGray
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Password",
-                        color = Color.Gray,
-                        modifier = Modifier.alpha(0.5f)
-                    )
-                },
-                trailingIcon = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        if (passwordTfError)
-                            Icon(Icons.Filled.Error, "error", tint = MaterialTheme.colors.error)
-                        IconButton(onClick = {
-                            passwordVisibility = !passwordVisibility
-                        }) {
-                            Icon(
-                                imageVector =
-                                if (passwordVisibility)
-                                    Icons.Default.Visibility
-                                else
-                                    Icons.Default.VisibilityOff,
-                                contentDescription = "",
-                                tint = Color.DarkGray
-                            )
-                        }
-                    }
+            Spacer(modifier = Modifier.size(30.dp))
 
-                },
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color.White,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                )
-            )
-            if (passwordTfError) {
-                Row(Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "Please enter password.",
-                        color = MaterialTheme.colors.error,
-                        style = MaterialTheme.typography.caption,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                Text(
-                    text = "Forgot password?",
-                    color = colorResource(id = R.color.blue),
-                    modifier = Modifier.clickable {})
-            }
-            Spacer(modifier = Modifier.size(40.dp))
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -235,29 +156,29 @@ fun SignInScreen(
                 onClick = {
                     if (emailTf.isEmpty()) {
                         emailTfError = true
-                    } else if (passwordTf.isEmpty()) {
-                        passwordTfError = true
-                    }else {
-                        sharedViewModel.signIn(emailTf, passwordTf, context)
+                    } else {
+                        sharedViewModel.forgotPassword(emailTf, context)
+                        focus.clearFocus()
                     }
-                    focus.clearFocus()
                 }) {
                 Text(
-                    text = "Sign in",
+                    text = "Send",
                     color = Color.White,
                     modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                 )
             }
 
             Spacer(modifier = Modifier.size(32.dp))
-            Row() {
-                Text(text = "Don't have an account yet? ", color = Color.Black)
+            Row {
+                Text(text = "Go back to ", color = Color.Black)
                 Text(
-                    text = "Sign up!",
+                    text = "Sign in.",
                     textDecoration = TextDecoration.Underline,
                     color = colorResource(id = R.color.blue),
                     modifier = Modifier.clickable {
-                        navController.navigate("sign_up")
+                        navController.navigate("sign_in") {
+                            popUpTo(0)
+                        }
                     })
             }
 
