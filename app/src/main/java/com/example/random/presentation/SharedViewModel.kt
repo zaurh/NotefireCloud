@@ -36,7 +36,7 @@ class SharedViewModel @Inject constructor(
         getNotes()
     }
 
-    //***********************  Firebase AUTH  ***********************
+    //***********************  Firebase AUTH  ***********************//
 
 
     fun signUp(email: String, password: String, confirmPassword: String, context: Context) {
