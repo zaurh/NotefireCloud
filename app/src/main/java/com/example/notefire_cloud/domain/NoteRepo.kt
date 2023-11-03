@@ -19,6 +19,7 @@ class NoteRepo @Inject constructor(
         getNotes()
     }
 
+
     fun addNote(noteData: NoteData) {
         val randomId = UUID.randomUUID().toString()
         val noteDataSet = noteData.copy(
@@ -28,7 +29,7 @@ class NoteRepo @Inject constructor(
     }
 
 
-    private fun getNotes() {
+    fun getNotes() {
         val currentUserId = auth.currentUser?.uid
         if (currentUserId != null) {
             firestore.collection("note")

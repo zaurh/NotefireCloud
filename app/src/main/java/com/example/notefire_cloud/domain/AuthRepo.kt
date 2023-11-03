@@ -53,12 +53,13 @@ class AuthRepo @Inject constructor(
 
     }
 
-    fun signIn(email: String, password: String, context: Context) {
+    fun signIn(email: String, password: String, context: Context, onSuccess : () -> Unit) {
         isAuthLoading.value = true
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 isAuthLoading.value = false
                 isSignedIn.value = true
+                onSuccess()
             }
             .addOnFailureListener {
                 isAuthLoading.value = false

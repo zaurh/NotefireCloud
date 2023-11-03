@@ -19,6 +19,10 @@ class NoteViewModel @Inject constructor(
     private var initialNoteList = listOf<NoteData>()
     private var isSearchStarting = true
 
+    fun getNotes(){
+        noteRepo.getNotes()
+    }
+
     fun addNote(noteData: NoteData) {
         noteRepo.addNote(noteData)
     }

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:637276245215:android:1200a630522b7b5dc76d6a",
         "android_client_info": {
-          "package_name": "com.example.random"
+          "package_name": "com.example.notefire_cloud"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "637276245215-h3lhb2misus0sirr69mje292tldedn7j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.random",
+            "package_name": "com.example.notefire_cloud",
             "certificate_hash": "0c3d7e3437d3c3e87f044005179c556d3e1bc13c"
           }
         },

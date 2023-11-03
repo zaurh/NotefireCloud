@@ -45,9 +45,16 @@ fun MainScreen(
     authViewModel: AuthViewModel
 ) {
     var dropdownExpanded by remember { mutableStateOf(false) }
+    val loginSuccess = authViewModel.loginSuccess.value
     val noteData = noteViewModel.noteData
     val focus = LocalFocusManager.current
 
+
+    LaunchedEffect(key1 = true){
+        if (loginSuccess){
+            noteViewModel.getNotes()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -104,7 +111,9 @@ fun MainScreen(
                     .padding(it)
             ) {
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(5.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(5.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
