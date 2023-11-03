@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import com.example.notefire_cloud.data.UserData
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class AuthRepo @Inject constructor(
@@ -15,12 +17,19 @@ class AuthRepo @Inject constructor(
 
     val isSignedIn = mutableStateOf(false)
     val isAuthLoading = mutableStateOf(false)
-    val currentUserId = auth.currentUser?.uid
 
+    private val _currentUserId = MutableStateFlow<String?>(null)
+    val currentUserId: StateFlow<String?> = _currentUserId
 
     init {
         isSignedIn.value = auth.currentUser != null
+        auth.addAuthStateListener { firebaseAuth ->
+            val userId = firebaseAuth.currentUser?.uid
+            _currentUserId.value = userId
+        }
     }
+
+
 
     fun signUp(email: String, password: String, confirmPassword: String, context: Context) {
         isAuthLoading.value = true

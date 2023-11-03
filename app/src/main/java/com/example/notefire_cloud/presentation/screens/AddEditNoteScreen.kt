@@ -46,7 +46,7 @@ fun AddEditNoteScreen(
     noteViewModel: NoteViewModel,
     authViewModel: AuthViewModel
 ) {
-    val currentUserId = authViewModel.currentUserId
+    val currentUserId by authViewModel.currentUserId.collectAsState()
     val focus = LocalFocusManager.current
     var titleTf by remember { mutableStateOf("") }
     var descriptionTf by remember { mutableStateOf("") }

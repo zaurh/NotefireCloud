@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.notefire_cloud.domain.AuthRepo
 import com.example.notefire_cloud.domain.NoteRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,7 +17,7 @@ class AuthViewModel @Inject constructor(
 
     val isAuthLoading = authRepo.isAuthLoading
     val isSignedIn = authRepo.isSignedIn
-    val currentUserId = authRepo.currentUserId
+    val currentUserId: StateFlow<String?> = authRepo.currentUserId
     val loginSuccess = mutableStateOf(false)
 
 
