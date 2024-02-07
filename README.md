@@ -3,7 +3,7 @@ Notefire Cloud is a note-taking app where you can note anything online. Once you
 
 # Preview
 
-![App Screenshot](https://i.hizliresim.com/kelyzpr.jpg)
+![App Screenshot](https://i.hizliresim.com/cues8po.png)
 
 
 
