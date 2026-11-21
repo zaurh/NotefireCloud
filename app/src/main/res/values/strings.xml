@@ -1,3 +1,85 @@
 <resources>
     <string name="app_name">Notefire</string>
+
+    <!-- Common -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
+    <string name="undo">Undo</string>
+
+    <!-- Sign in -->
+    <string name="sign_in_title">Welcome back</string>
+    <string name="sign_in_subtitle">Sign in to access your notes on any device.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password_link">Forgot password?</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="create_account_link">Create one</string>
+
+    <!-- Sign up -->
+    <string name="sign_up_title">Create account</string>
+    <string name="sign_up_subtitle">Your notes, safely synced in the cloud.</string>
+    <string name="sign_up">Sign up</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="sign_in_link">Sign in</string>
+    <string name="password_hint">At least 8 characters</string>
+
+    <!-- Forgot password -->
+    <string name="forgot_title">Reset password</string>
+    <string name="forgot_subtitle">Enter the email associated with your account and we\'ll send you a link to reset your password.</string>
+    <string name="send_reset_link">Send reset link</string>
+    <string name="reset_email_sent">Reset link sent. Please check your inbox.</string>
+
+    <!-- Validation -->
+    <string name="error_email_empty">Please enter your email.</string>
+    <string name="error_email_invalid">This email doesn\'t look right.</string>
+    <string name="error_password_empty">Please enter your password.</string>
+    <string name="error_password_short">Password must be at least 8 characters.</string>
+    <string name="error_password_mismatch">Passwords don\'t match.</string>
+
+    <!-- Backend errors -->
+    <string name="error_invalid_credentials">Email or password is incorrect.</string>
+    <string name="error_email_in_use">This email is already registered.</string>
+    <string name="error_weak_password">Please choose a stronger password.</string>
+    <string name="error_network">No internet connection. Please try again.</string>
+    <string name="error_too_many_requests">Too many attempts. Please wait a moment and try again.</string>
+    <string name="error_permission_denied">The server rejected this request. Please sign in again.</string>
+    <string name="error_unknown">Something went wrong. Please try again.</string>
+
+    <!-- Notes list -->
+    <string name="search_notes">Search your notes</string>
+    <string name="clear_search">Clear search</string>
+    <string name="account">Account</string>
+    <string name="new_note">New note</string>
+    <string name="pinned">Pinned</string>
+    <string name="others">Others</string>
+    <string name="empty_notes_title">No notes yet</string>
+    <string name="empty_notes_message">Tap “New note” to capture your first idea.</string>
+    <string name="empty_search_title">No matching notes</string>
+    <string name="empty_search_message">Try a different word.</string>
+    <string name="note_deleted">Note deleted</string>
+    <string name="note_save_failed">Couldn\'t sync your note. Please try again.</string>
+    <string name="notes_load_failed">Couldn\'t load your notes.</string>
+    <string name="untitled">Untitled</string>
+    <string name="pin">Pin</string>
+    <string name="unpin">Unpin</string>
+    <string name="delete">Delete</string>
+
+    <!-- Account -->
+    <string name="signed_in_as">Signed in as</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account">Delete account</string>
+    <string name="delete_account_title">Delete your account?</string>
+    <string name="delete_account_message">This permanently deletes your account and all of your notes. This can\'t be undone. Enter your password to confirm.</string>
+    <string name="delete_account_confirm">Delete forever</string>
+
+    <!-- Editor -->
+    <string name="title_hint">Title</string>
+    <string name="content_hint">Start typing…</string>
+    <string name="note_color">Note color</string>
+    <string name="edited_at">Edited %1$s</string>
+    <string name="note_not_found">This note no longer exists.</string>
 </resources>
