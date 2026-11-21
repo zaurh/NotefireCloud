@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zaurh.notefireremote"
+    namespace = "com.zaurh.notefirecloud"
     compileSdk = 37
 
     defaultConfig {
