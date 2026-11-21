@@ -7,6 +7,18 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+# Per-user / machine-specific Android Studio files
+/.idea/AndroidProjectSystem.xml
+/.idea/deploymentTargetSelector.xml
+/.idea/markdown.xml
+/.idea/migrations.xml
+/.idea/runConfigurations.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/appInsightsSettings.xml
+/.idea/deviceManager.xml
+/.idea/other.xml
+/.idea/studiobot.xml
 .DS_Store
 /build
 /captures
