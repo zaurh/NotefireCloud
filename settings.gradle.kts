@@ -18,5 +18,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "notefire_cloud"
+rootProject.name = "Notefire Cloud"
 include(":app")
