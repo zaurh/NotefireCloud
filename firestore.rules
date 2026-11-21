@@ -1,0 +1,35 @@
+rules_version = '2';
+
+// Deploy with:  firebase deploy --only firestore:rules
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isValidNote(noteId) {
+      let data = request.resource.data;
+      return data.userId == request.auth.uid
+        && data.noteId == noteId
+        && data.noteTitle is string && data.noteTitle.size() <= 1000
+        && data.noteDescription is string && data.noteDescription.size() <= 200000;
+    }
+
+    // Each note belongs to exactly one user (the `userId` field).
+    match /note/{noteId} {
+      // `resource == null` lets the app ask for a note that no longer exists (it gets "not found").
+      allow get: if signedIn() && (resource == null || resource.data.userId == request.auth.uid);
+      // Queries must filter on userId == the caller's uid (the app always does).
+      allow list: if signedIn() && resource.data.userId == request.auth.uid;
+      allow create: if signedIn() && isValidNote(noteId);
+      allow update: if signedIn() && resource.data.userId == request.auth.uid && isValidNote(noteId);
+      allow delete: if signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

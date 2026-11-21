@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Release signing
+keystore.properties
+*.jks
+*.keystore
+
+# Firebase CLI
+.firebase/
+firebase-debug.log
+firestore-debug.log
+*-debug.log
